@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>SpoonCalc Push</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f7f3ef;
+padding:40px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+input,textarea{
+
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:20px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:14px;
+
+}
+
+button{
+
+background:#8B5E3C;
+color:white;
+border:none;
+padding:12px;
+width:100%;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>SpoonCalc Push Notification</h2>
+
+<input id="title" placeholder="Notification Title"/>
+
+<textarea id="message" placeholder="Notification Message"></textarea>
+
+<button onclick="send()">Send Notification</button>
+
+</div>
+
+<script>
+
+const tokens=[
+"ExponentPushToken[omntuFIgWhJCgYIwuvZXZb]"
+]
+
+function send(){
+
+const title=document.getElementById("title").value
+const message=document.getElementById("message").value
+
+tokens.forEach(token=>{
+
+fetch("https://exp.host/--/api/v2/push/send",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+to:token,
+
+sound:"default",
+
+title:title,
+
+body:message
+
+})
+
+})
+
+})
+
+alert("Notification Sent")
+
+}
+
+</script>
+
+</body>
+</html>
